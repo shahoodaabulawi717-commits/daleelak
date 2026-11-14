@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>المساعد الذكي - دليلك</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Tahoma, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f0f7fa;
+            color: #23445a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #087e9c, #36b6c5);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+            header h1 {
+                margin: 0 0 10px;
+                font-size: 30px;
+            }
+
+            header p {
+                margin: 0;
+            }
+
+        .container {
+            max-width: 850px;
+            margin: 35px auto;
+            padding: 15px;
+        }
+
+        .chat-box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .chat-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+            .chat-header h2 {
+                color: #087e9c;
+                margin: 0;
+            }
+
+        #messages {
+            height: 350px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f8fbfc;
+            border-radius: 10px;
+        }
+
+        .message {
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 12px;
+            max-width: 85%;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .bot {
+            background: #dff4f5;
+            margin-left: auto;
+        }
+
+        .user {
+            background: #087e9c;
+            color: white;
+            margin-right: auto;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+            input:focus {
+                border-color: #087e9c;
+            }
+
+        button {
+            background: #087e9c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background: #05657d;
+            }
+
+        .back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #087e9c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            .input-area {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🤖 المساعد الذكي - دليلك</h1>
+        <p>مرشدك الجامعي للإجابة عن استفساراتك الأكاديمية</p>
+    </header>
+
+    <div class="container">
+
+        <div class="chat-box">
+
+            <div class="chat-header">
+                <h2>مرحباً بك في دليلك!</h2>
+                <p>اكتب سؤالك وسأساعدك في الوصول إلى المعلومة.</p>
+            </div>
+
+            <div id="messages">
+
+                <div class="message bot">
+                    أهلاً وسهلاً بك! 👋
+                    أنا المساعد الذكي في دليلك.
+                    كيف يمكنني مساعدتك اليوم؟
+                </div>
+
+            </div>
+
+            <div class="input-area">
+
+                <input type="text"
+                       id="userInput"
+                       placeholder="اكتب سؤالك هنا...">
+
+                <button onclick="sendMessage()">إرسال</button>
+
+            </div>
+
+        </div>
+
+        <a href="HtmlPage1.html" class="back">
+            ← العودة إلى الصفحة الرئيسية
+        </a>
+
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة © مشروع دليلك
+    </footer>
+
+    <script>function sendMessage() {
+
+        let input = document.getElementById("userInput");
+
+        let question = input.value.trim();
+
+        if (question === "") {
+            return;
+        }
+
+        addMessage(question, "user");
+
+        let answer = getAnswer(question);
+
+        setTimeout(function () {
+            addMessage(answer, "bot");
+        }, 500);
+
+        input.value = "";
+    }
+
+    function addMessage(text, type) {
+
+        let messages = document.getElementById("messages");
+
+        let message = document.createElement("div");
+
+        message.className = "message " + type;
+
+        message.textContent = text;
+
+        messages.appendChild(message);
+
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function getAnswer(question) {
+
+        question = question.toLowerCase();
+
+        if (question.includes("معدل")) {
+
+            return "لحساب المعدل التراكمي، نحتاج إلى معرفة معدلك السابق وعدد الساعات المنجزة، بالإضافة إلى علامات وساعات المواد الجديدة.";
+
+        }
+
+        else if (question.includes("خطة") || question.includes("دراسية")) {
+
+            return "يمكنك الرجوع إلى الخطط الدراسية لمعرفة المواد المطلوبة لكل تخصص والفصول الدراسية.";
+
+        }
+
+        else if (question.includes("ساعات")) {
+
+            return "الساعات المعتمدة هي الوحدات التي تحدد وزن كل مساق ضمن الخطة الدراسية.";
+
+        }
+
+        else if (question.includes("تسجيل") || question.includes("مواد")) {
+
+            return "يمكنك مراجعة خطتك الدراسية والتأكد من المتطلبات السابقة قبل تسجيل المواد.";
+
+        }
+
+        else if (question.includes("إرشاد") || question.includes("مرشد")) {
+
+            return "الإرشاد الأكاديمي يساعدك في اختيار المواد وتنظيم خطتك الدراسية ومتابعة تقدمك الأكاديمي.";
+
+        }
+
+        else if (question.includes("مرحبا") || question.includes("السلام")) {
+
+            return "أهلاً وسهلاً بك! 🌸 كيف يمكنني مساعدتك؟";
+
+        }
+
+        else if (question.includes("شكرا")) {
+
+            return "العفو! يسعدني مساعدتك دائماً ❤️";
+
+        }
+
+        else {
+
+            return "عذراً، لم أتمكن من فهم سؤالك. حاول كتابة السؤال بطريقة أخرى أو تحديد الموضوع الذي تستفسر عنه.";
+
+        }
+    }
+
+    document.getElementById("userInput").addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+
+    });</script>
+
+</body>
+</html>
