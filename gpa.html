@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حاسبة المعدل - دليلك</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f4fa;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background: white;
+            max-width: 450px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        input {
+            width: 85%;
+            padding: 12px;
+            margin: 8px;
+        }
+
+        button {
+            background: #315b91;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎓 دليلك</h1>
+        <h2>حاسبة المعدل التراكمي GPA</h2>
+
+        <input type="number" id="grade" placeholder="العلامة من 100">
+        <input type="number" id="hours" placeholder="عدد الساعات">
+
+        <button onclick="calculate()">احسب المعدل</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            let grade = Number(document.getElementById("grade").value);
+            let hours = Number(document.getElementById("hours").value);
+
+            if (document.getElementById("grade").value === "" ||
+                document.getElementById("hours").value === "" ||
+                grade < 0 || grade > 100 || hours <= 0) {
+                document.getElementById("result").innerHTML = "أدخلي بيانات صحيحة";
+                return;
+            }
+
+            let gpa = grade / 100 * 4;
+
+            document.getElementById("result").innerHTML =
+                "معدلك التقديري: " + gpa.toFixed(2) + " من 4";
+        }
+    </script>
+
+</body>
+</html>
